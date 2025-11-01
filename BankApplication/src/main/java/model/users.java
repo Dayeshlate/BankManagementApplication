@@ -10,13 +10,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data 
+@NoArgsConstructor
+@AllArgsConstructor
 public class users {
 
     @Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-    private String id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name="branchId")
@@ -26,7 +32,7 @@ public class users {
 
     private String email;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<accounts> account;
 
     

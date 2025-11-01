@@ -11,13 +11,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data // 👈 generates getters, setters, toString, equals, hashCode
+@NoArgsConstructor // 👈 generates no-argument constructor
+@AllArgsConstructor // 👈 generates all-argument constructor
 public class accounts {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name="userId")
