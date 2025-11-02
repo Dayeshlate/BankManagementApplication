@@ -18,7 +18,7 @@ public class transactions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    public Integer id;
 
     @ManyToOne
     @JoinColumn(name="accountId")
