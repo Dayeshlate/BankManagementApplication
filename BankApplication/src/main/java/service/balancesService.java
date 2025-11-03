@@ -14,7 +14,7 @@ public class balancesService {
     @Autowired
     private balancesRepo repo;
 
-    public Optional<balances> balance(int id){
+    public Optional<balances> getBalance(int id){
         return repo.findById(id);
     }
 
