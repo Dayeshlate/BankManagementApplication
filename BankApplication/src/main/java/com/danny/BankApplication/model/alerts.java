@@ -1,5 +1,7 @@
 package com.danny.BankApplication.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +24,7 @@ public class alerts {
 
     @ManyToOne
     @JoinColumn(name="userId")
-    private users user;
+    private List<users> user;
 
     @ManyToOne
     @JoinColumn(name="typeId")

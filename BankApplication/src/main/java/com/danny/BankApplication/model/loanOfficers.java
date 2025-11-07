@@ -1,6 +1,7 @@
 package com.danny.BankApplication.model;
 
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -34,4 +35,9 @@ public class loanOfficers {
 
     @OneToMany(mappedBy = "loanOfficer", cascade = CascadeType.ALL)
     private List<loans> loan;
+
+    public Optional<loans> findById(Integer id2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    }
 }

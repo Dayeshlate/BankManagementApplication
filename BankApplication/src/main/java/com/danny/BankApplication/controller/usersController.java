@@ -31,7 +31,7 @@ public class usersController {
         return "user save succesfully !";
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("get/{id}")
     public Optional<users> getUser(@PathVariable int id) {
         return  serv.getUser(id);
     }

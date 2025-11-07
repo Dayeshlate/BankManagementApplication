@@ -43,6 +43,7 @@ public class transactionTypesController {
     
     @DeleteMapping("/delete/{id}")
     public String deleteTransactionType(@PathVariable int id){
+        serv.deleteTransactionTypes(id);
         return "Transaction Type delete succesfully !";
     }
     

@@ -132,4 +132,24 @@ public class GlobalExceptionHandler{
             
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+     @ExceptionHandler(BankNotFoundException.class)
+    public ResponseEntity<Map<String,Object>> handleBankNotFound(BankNotFoundException ex){
+        Map<String,Object> errorResponse = new HashMap<>();
+            errorResponse.put("timestamp",LocalDateTime.now());
+            errorResponse.put("status",HttpStatus.NOT_FOUND);
+            errorResponse.put("error", ex.getMessage());
+            
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+     @ExceptionHandler(BalanceNotFoundException.class)
+    public ResponseEntity<Map<String,Object>> handleBalanceNotFound(BalanceNotFoundException ex){
+        Map<String,Object> errorResponse = new HashMap<>();
+            errorResponse.put("timestamp",LocalDateTime.now());
+            errorResponse.put("status",HttpStatus.NOT_FOUND);
+            errorResponse.put("error", ex.getMessage());
+            
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 }

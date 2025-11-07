@@ -24,7 +24,11 @@ public class payments {
 
     @ManyToOne
     @JoinColumn(name="recipientId")
-    private users user;
+    private users recipientUser;
+
+    @ManyToOne
+    @JoinColumn(name="senderId")
+    private users senderUser;
 
     @ManyToOne
     @JoinColumn(name="accountId")

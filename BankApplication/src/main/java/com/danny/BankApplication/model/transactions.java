@@ -20,14 +20,18 @@ public class transactions {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer id;
 
-    @ManyToOne
-    @JoinColumn(name="accountId")
-    private accounts account;
-
+    
     @ManyToOne
     @JoinColumn(name="typeId")
     private transactionTypes transactionType;
-
+    
     private float amount;
+    
+    @ManyToOne
+    @JoinColumn(name="SenderAccountId")
+    private accounts senderAccount;
 
+    @ManyToOne
+    @JoinColumn(name="recipientAccountId")
+    private accounts recipientAccount;
 }
