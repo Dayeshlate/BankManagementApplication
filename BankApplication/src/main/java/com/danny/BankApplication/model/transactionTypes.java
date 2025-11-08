@@ -2,7 +2,9 @@ package com.danny.BankApplication.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,8 @@ import lombok.NoArgsConstructor;
 @Data 
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class transactionTypes {
 
     @Id
@@ -24,7 +28,7 @@ public class transactionTypes {
 
     private String  name;
 
-    @OneToMany(mappedBy = "transactionType", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "transactionType")
     private List<transactions> transactions;
 
     

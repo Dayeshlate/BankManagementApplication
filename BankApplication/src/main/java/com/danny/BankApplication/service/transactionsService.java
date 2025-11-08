@@ -46,7 +46,7 @@ public class transactionsService {
 
     public Optional<transactions> getTransaction(int id){
         Optional<transactions> transaction = repo.findById(id);
-        if (!transaction.isEmpty()) {
+        if (transaction.isEmpty()) {
             throw new TransactionNotFoundException("Transaction not found with id :"+id);
         }
         return repo.findById(id);

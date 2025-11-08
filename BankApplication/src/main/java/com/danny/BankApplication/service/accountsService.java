@@ -59,7 +59,7 @@ public class accountsService {
 
     public Optional<accounts> getAccount(int id){
         Optional<accounts> account = repo.findById(id);
-        if(!account.isEmpty()){
+        if(account.isEmpty()){
             throw new AccountNotFoundException("Account is not found with id :"+id);
         }
         return repo.findById(id);

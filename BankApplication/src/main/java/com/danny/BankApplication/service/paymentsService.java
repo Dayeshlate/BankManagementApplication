@@ -8,13 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.danny.BankApplication.exception.AccountNotFoundException;
 import com.danny.BankApplication.exception.PaymentNotFoundException;
-import com.danny.BankApplication.exception.UserNotFoundException;
 import com.danny.BankApplication.model.accounts;
 import com.danny.BankApplication.model.payments;
-import com.danny.BankApplication.model.users;
 import com.danny.BankApplication.repository.accountsRepo;
 import com.danny.BankApplication.repository.paymentsRepo;
-import com.danny.BankApplication.repository.usersRepo;
 
 @Service
 public class paymentsService {
@@ -22,8 +19,6 @@ public class paymentsService {
     @Autowired
     private paymentsRepo repo;
 
-    @Autowired
-    private usersRepo userRepo;
 
     @Autowired
     private accountsRepo accountRepo;
@@ -34,33 +29,27 @@ public class paymentsService {
 
     public Optional<payments> getPayment(int id){
         Optional<payments> payment = repo.findById(id);
-        if(!payment.isEmpty()){
+        if(payment.isEmpty()){
             throw new PaymentNotFoundException("Payment not found with id :"+id);
         }
         return repo.findById(id);
     }
 
     public payments savePayment(payments payment){
-        if(payment.getSenderUser() != null && payment.getSenderUser().getId() != null){
-            users existingSender = userRepo.findById(payment.getSenderUser().getId())
-            .orElseThrow(() -> new UserNotFoundException("Sender is not found with id :"+payment.getSenderUser().getId()));
+        if(payment.getSenderAccount() != null && payment.getSenderAccount().getId() != null){
+            accounts existingSenderAccount = accountRepo.findById(payment.getSenderAccount().getId())
+            .orElseThrow(() -> new AccountNotFoundException("Sender is not found with id :"+payment.getSenderAccount().getId()));
 
-            payment.setSenderUser(existingSender);
+            payment.setSenderAccount(existingSenderAccount);
         }
 
-        if(payment.getRecipientUser() != null && payment.getRecipientUser().getId() != null){
-            users existingRecipient = userRepo.findById(payment.getRecipientUser().getId())
-            .orElseThrow(() -> new UserNotFoundException("Recipient is not found with id :"+payment.getRecipientUser().getId()));
+        if(payment.getRecipientAccount() != null && payment.getRecipientAccount().getId() != null){
+            accounts existingRecipientAccount = accountRepo.findById(payment.getRecipientAccount().getId())
+            .orElseThrow(() -> new AccountNotFoundException("Recipient Account is not found with id :"+payment.getRecipientAccount().getId()));
 
-            payment.setRecipientUser(existingRecipient);
+            payment.setRecipientAccount(existingRecipientAccount);
         }
 
-        if(payment.getAccount() != null && payment.getAccount().getId() != null){
-            accounts existingAccount = accountRepo.findById(payment.getAccount().getId())
-            .orElseThrow(() -> new AccountNotFoundException("Account not found with id :"+payment.getAccount().getId()));
-
-            payment.setAccount(existingAccount);
-        }        
         return repo.save(payment);
     }
 

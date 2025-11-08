@@ -1,6 +1,5 @@
 package com.danny.BankApplication.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,19 +31,12 @@ public class alertsService {
     private alertTypesRepo alertTypeRepo;
 
     public void saveAlert(alerts alert){
-        if(alert.getUser() != null && !alert.getUser().isEmpty()){
-            List<users> user = new ArrayList<>();
-        for (users use : alert.getUser()) {
-            if (use.getId() != null) {
-                users existingUser = userRepo.findById(use.getId())
-                    .orElseThrow(() -> new UserNotFoundException(
-                        "User not found with id: " + use.getId()
-                    ));
-                user.add(existingUser);
+        if(alert.getUser() != null && alert.getUser().getId() != null){
+            users existingUser = userRepo.findById(alert.getUser().getId())
+            .orElseThrow(() -> new UserNotFoundException("user not found with id :"+alert.getUser().getId()));
+       
+            alert.setUser(existingUser);
             }
-        }
-        alert.setUser(user);
-        }
 
         if(alert.getAlertType() != null && alert.getAlertType().getId() != null){
             alertTypes existingAlertType = alertTypeRepo.findById(alert.getAlertType().getId())
@@ -68,7 +60,7 @@ public class alertsService {
 
     public Optional<alerts> getAlert(int id){
          Optional<alerts> alert = repo.findById(id);
-        if(!alert.isEmpty()){
+        if(alert.isEmpty()){
             throw new AlertNotFoundException("Alert is not found with id :"+id);
         }
         return repo.findById(id);

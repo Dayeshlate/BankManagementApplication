@@ -69,7 +69,7 @@ public class usersService {
 
     public Optional<users> getUser(int id){
         Optional<users> user =repo.findById(id);
-        if (!user.isEmpty()) {
+        if (user.isEmpty()) {
             throw new UserNotFoundException("user not found with id :"+id);
         }
         return repo.findById(id);

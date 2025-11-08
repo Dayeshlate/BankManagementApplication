@@ -28,10 +28,10 @@ public class banksService {
 
     public Optional<banks> getBank(int id){
         Optional<banks> bank = repo.findById(id);
-        if (!bank.isEmpty()) {
+        if (bank.isEmpty()) {
             throw new BankNotFoundException("Bank not found with id :"+id);
         }
-        return repo.findById(id);
+        return bank;
     }
 
     public void deleteBank(int id){

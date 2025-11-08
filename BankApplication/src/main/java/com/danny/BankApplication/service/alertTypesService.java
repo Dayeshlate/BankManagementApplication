@@ -23,7 +23,7 @@ public class alertTypesService {
 
     public Optional<alertTypes> getAlertType(int id){
         Optional<alertTypes> alertType = repo.findById(id);
-        if (!alertType.isEmpty()) {
+        if (alertType.isEmpty()) {
             throw new AlertTypeNotFoundException("alert type is not found with id :"+id);
         }
         return repo.findById(id);

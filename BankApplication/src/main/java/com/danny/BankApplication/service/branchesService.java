@@ -47,7 +47,7 @@ public class branchesService {
 
     public Optional<branches> getBranch(int id){
         Optional<branches> branch = repo.findById(id);
-        if(!branch.isEmpty()){
+        if(branch.isEmpty()){
             throw new BranchNotFoundException("Branch Not found with id :"+id);
         }
         return branch;

@@ -34,7 +34,7 @@ public class loansService {
 
     public Optional<loans> getLoan(int id){
         Optional<loans> loan = repo.findById(id);
-        if(!loan.isEmpty()){
+        if(loan.isEmpty()){
             throw new LoanNotFoundException("Loan not found with id :"+id);
         }
         return repo.findById(id);

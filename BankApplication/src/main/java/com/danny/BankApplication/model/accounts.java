@@ -2,6 +2,9 @@ package com.danny.BankApplication.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Data // 👈 generates getters, setters, toString, equals, hashCode
 @NoArgsConstructor // 👈 generates no-argument constructor
 @AllArgsConstructor // 👈 generates all-argument constructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class accounts {
 
@@ -34,9 +38,9 @@ public class accounts {
     @JoinColumn(name="balanceId")
     private balances balance;
 
-    @OneToMany(mappedBy = "account" , cascade =CascadeType.ALL)
+    @OneToMany(mappedBy = "account")
     private List<loans> loan;
 
-    @OneToMany(mappedBy = "account" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account")
     private List<cards> card;
 }

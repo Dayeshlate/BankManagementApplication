@@ -23,7 +23,7 @@ public class transactionTypesService {
 
     public Optional<transactionTypes> getTransactionType(int id){
         Optional<transactionTypes> transactionType = repo.findById(id);
-        if (!transactionType.isEmpty()) {
+        if (transactionType.isEmpty()) {
             throw new TransactionTypeNotFoundException("Transaction Type not found with id :"+id);
         }
         return repo.findById(id);

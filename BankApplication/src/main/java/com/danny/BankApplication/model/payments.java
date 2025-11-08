@@ -1,5 +1,8 @@
 package com.danny.BankApplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +17,8 @@ import lombok.NoArgsConstructor;
 @Data 
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class payments {
 
     @Id
@@ -23,14 +28,11 @@ public class payments {
     private float amount;
 
     @ManyToOne
-    @JoinColumn(name="recipientId")
-    private users recipientUser;
+    @JoinColumn(name="senderAccountId")
+    private accounts senderAccount;
 
     @ManyToOne
-    @JoinColumn(name="senderId")
-    private users senderUser;
+    @JoinColumn(name="recipientAccountId")
+    private accounts recipientAccount;
 
-    @ManyToOne
-    @JoinColumn(name="accountId")
-    private accounts account;
 }

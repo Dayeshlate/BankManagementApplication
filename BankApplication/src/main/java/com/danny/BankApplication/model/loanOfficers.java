@@ -1,9 +1,10 @@
 package com.danny.BankApplication.model;
 
 import java.util.List;
-import java.util.Optional;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,8 @@ import lombok.NoArgsConstructor;
 @Data 
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class loanOfficers {
 
     @Id
@@ -29,15 +32,10 @@ public class loanOfficers {
 
     private String position;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="branchId")
     private branches branch;
 
-    @OneToMany(mappedBy = "loanOfficer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "loanOfficer")
     private List<loans> loan;
-
-    public Optional<loans> findById(Integer id2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
-    }
 }

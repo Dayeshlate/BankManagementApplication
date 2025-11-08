@@ -58,7 +58,7 @@ public class cardsService {
 
     public Optional<cards> getCard(int id){
         Optional<cards> card = repo.findById(id);
-        if(!card.isEmpty()){
+        if(card.isEmpty()){
             throw new CardNotFoundException("card is not found with id :"+id);
         }
         return repo.findById(id);
